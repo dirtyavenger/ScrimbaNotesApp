@@ -24593,7 +24593,6 @@ var _sidebar = require("./components/Sidebar");
 var _sidebarDefault = parcelHelpers.interopDefault(_sidebar);
 var _editor = require("./components/Editor");
 var _editorDefault = parcelHelpers.interopDefault(_editor);
-var _data = require("./data");
 var _reactSplit = require("react-split");
 var _reactSplitDefault = parcelHelpers.interopDefault(_reactSplit);
 var _nanoid = require("nanoid");
@@ -24601,7 +24600,8 @@ var _s = $RefreshSig$();
 function App() {
     _s();
     const [notes, setNotes] = (0, _reactDefault.default).useState(()=>JSON.parse(localStorage.getItem("notes")) || []);
-    const [currentNoteId, setCurrentNoteId] = (0, _reactDefault.default).useState(notes[0] && notes[0].id || "");
+    const [currentNoteId, setCurrentNoteId] = (0, _reactDefault.default).useState(notes[0]?.id || "");
+    const currentNote = notes.find((note)=>note.id === currentNoteId) || notes[0];
     (0, _reactDefault.default).useEffect(()=>localStorage.setItem("notes", JSON.stringify(notes)), [
         notes
     ]);
@@ -24633,11 +24633,6 @@ function App() {
             ];
         });
     }
-    function findCurrentNote() {
-        return notes.find((note)=>{
-            return note.id === currentNoteId;
-        }) || notes[0];
-    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
         children: notes.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactSplitDefault.default), {
             sizes: [
@@ -24649,27 +24644,27 @@ function App() {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _sidebarDefault.default), {
                     notes: notes,
-                    currentNote: findCurrentNote(),
+                    currentNote: currentNote,
                     setCurrentNoteId: setCurrentNoteId,
                     newNote: createNewNote,
                     deleteNote: deleteNote
                 }, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 67,
+                    lineNumber: 59,
                     columnNumber: 11
                 }, this),
                 currentNoteId && notes.length > 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _editorDefault.default), {
-                    currentNote: findCurrentNote(),
+                    currentNote: currentNote,
                     updateNote: updateNote
                 }, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 75,
+                    lineNumber: 67,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "App.js",
-            lineNumber: 66,
+            lineNumber: 58,
             columnNumber: 9
         }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "no-notes",
@@ -24678,7 +24673,7 @@ function App() {
                     children: "You have no notes"
                 }, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 80,
+                    lineNumber: 72,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -24687,23 +24682,23 @@ function App() {
                     children: "Create one now"
                 }, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 81,
+                    lineNumber: 73,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "App.js",
-            lineNumber: 79,
+            lineNumber: 71,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "App.js",
-        lineNumber: 64,
+        lineNumber: 56,
         columnNumber: 5
     }, this);
 }
 exports.default = App;
-_s(App, "h9rVnagE36yNkFkROwCMD8XJBck=");
+_s(App, "6GkOKkeyKkMmYRRBL+RdhsIg19M=");
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -24713,7 +24708,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./components/Sidebar":"fQODk","./components/Editor":"8GscW","./data":"5pclG","react-split":"b0NCj","nanoid":"2ifus","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fQODk":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./components/Sidebar":"fQODk","./components/Editor":"8GscW","react-split":"b0NCj","nanoid":"2ifus","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fQODk":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$1ad6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -31733,50 +31728,7 @@ exports.extractKeyActivatedCommands = extractKeyActivatedCommands;
     else root.showdown = showdown;
 }).call(this);
 
-},{}],"5pclG":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "data", ()=>data);
-const data = [
-    {
-        id: 1,
-        body: `### This just in!
-
-Markdown is an *awesome* way to write **very basic HTML** by typing manually
-
-It can be used for:
-
-1. README files
-1. Slack and Discord messages
-1. **So much more!**
-
----
-
-Here's a division 👆`
-    },
-    {
-        id: 2,
-        body: `a`
-    },
-    {
-        id: 3,
-        body: `b`
-    },
-    {
-        id: 4,
-        body: `c`
-    },
-    {
-        id: 5,
-        body: `d`
-    },
-    {
-        id: 6,
-        body: `e`
-    }
-];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b0NCj":[function(require,module,exports) {
+},{}],"b0NCj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
